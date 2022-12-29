@@ -11,3 +11,5 @@ const CustomButton = ({ btnType, title, handleClick,styles }) => {
         </button>
     )
 }
+
+export default CustomButton
