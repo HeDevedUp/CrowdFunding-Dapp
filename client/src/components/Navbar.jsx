@@ -34,7 +34,7 @@ return(
      </div>
 
      {/*  Small screen navigation*/}
-     <div className="sm:hidden flex justify-between items-center relative">
+     {/* <div className="sm:hidden flex justify-between items-center relative">
      <div className=" w-[40px] h-[40px] rounded-[10px] bg-[#2c2f32] flex justify-center items-center cursor-pointer">
     <img   src={ logo} alt='user' className=" w-[60%] h-[60%] object-contain cursor-pointer"/>
      </div>
@@ -77,8 +77,8 @@ return(
                 />
 
           </div>
-         </div>
-        </div>
+         </div> */}
+        {/* </div> */}
         </div>
 )
 }
