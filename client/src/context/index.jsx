@@ -7,7 +7,7 @@ const StateContext = createContext();
 
 export const StateContextProvider = ({children}) => {
     const { contract } = useContract('0x89e04E6561a2Be96b565296878A9CB9FdF17A19f');
-    const {mutateAsync: createCampaign} = useContractWrite(contract, ' createCampaign');
+    const {mutateAsync: createCampaign} = useContractWrite(contract, 'createCampaign');
 
 
 const address = useAddress();
@@ -24,6 +24,7 @@ try{
         form.description,
         form.target,
         new Date(form.deadline).getTime(),
+        form.image
     ])
 
     console.log("contract call sucess", data)
@@ -32,13 +33,29 @@ console.log("contract call failure", error)
 }
 }
 
+const getCampaigns = async() =>{
+    const campaigns = await contract.call('getCampaign')
+    const parsedCampaigns = campaigns.map((campaign,i)=>({
+          owner: campaign.owner,
+          title:   campaign.title,
+          description: campaign.description,
+          target: campaign.target,
+          deadline : campaign.deadline,
+          amountCollected : ethers.utils.formatEther(campaign.amountCollected.toString()),
+          image: campaign.image,
+          pId: i
+    }))
+    return parsedCampaigns
+}
+
 return(
     <StateContext.Provider
     value={{
         address,
         contract,
         connect,
-        // createCampaign: publishCampaign,
+        createCampaign: publishCampaign,
+        getCampaigns,
     }}
     >
              {children}
