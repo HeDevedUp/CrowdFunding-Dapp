@@ -7,9 +7,9 @@ import App from './App';
 import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  // <ThirdwebProvider desiredChainId={ChainId.Goerli}>
+  <ThirdwebProvider desiredChainId={ChainId.Goerli}>
     <Router>
    <App />
     </Router>
-  // </ThirdwebProvider>,
+  </ThirdwebProvider>,
 );
