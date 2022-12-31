@@ -33,7 +33,7 @@ console.log("contract call failure", error)
 }
 }
 
-const getCampaigns = async() =>{
+    const getCampaigns = async () => {
     const campaigns = await contract.call('getCampaign')
     const parsedCampaigns = campaigns.map((campaign,i)=>({
           owner: campaign.owner,
@@ -48,6 +48,36 @@ const getCampaigns = async() =>{
     return parsedCampaigns
 }
 
+    const donate = async (pId, amount) => {
+        const data = await contract.call('donateCampaign', pId, { value: ethers.utils.parseEther(amount) })
+        return data;
+    }
+
+    const getDonations = async (pId) => {
+
+        const donations = await contract.call('getDonators', pId)
+        const numOfDonations = donations[0].length
+        const parsedDonations = []
+
+        for (let i = 0; i < numOfDonations; i++) {
+
+            parsedDonations.push({
+                donator: donations[0][i],
+                donation: ethers.utils.formatEther(donations[1][i].toString())
+            })
+
+        }
+        return parsedDonations;
+    }
+
+    const getUserCampaign = async () => {
+        const allCampaigns = await getCampaigns();
+
+        const filteredCampaigns = allCampaigns.filter((campaign) => campaign.owner === address);
+
+        return filteredCampaigns;
+    }
+
 return(
     <StateContext.Provider
     value={{
@@ -55,7 +85,10 @@ return(
         contract,
         connect,
         createCampaign: publishCampaign,
+            getUserCampaign,
         getCampaigns,
+            getDonations,
+            donate,
     }}
     >
              {children}

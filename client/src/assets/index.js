@@ -15,12 +15,13 @@ import thirdweb from './thirdweb.png';
 
 export {
   tagType,
+  profile,
+
   createCampaign,
   dashboard,
   logo,
   logout,
   payment,
-  profile,
   sun,
   withdraw,
   search,
