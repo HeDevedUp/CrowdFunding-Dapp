@@ -21,9 +21,6 @@ export default defineConfig({
   define: {
     global: "globalThis",
     "process.env": {},
-      root: 'src',
-     build: {
-    outDir: '/dist'
-  }
+      
   },
 });
